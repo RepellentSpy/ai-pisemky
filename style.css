@@ -12,7 +12,8 @@
 }
 
 body {
-    padding: 1rem;
+    padding: 2rem;
+    padding-top: 1rem;
     background-color: #1e262d;
     border: 3px solid #cf7644;
     transition: all 1s;
@@ -80,4 +81,41 @@ button:hover {
 
 button:active {
     background-color: #c5b68e;
+}
+
+#listExamButton {
+    position: fixed;
+    bottom: 0;
+    right: 1rem;
+}
+
+#examListDiv {
+    background-color: #0000db;
+    color: white;
+    padding: 1.2rem;
+    position: fixed;
+    top: 0.5rem;
+    right: -125.5rem;
+    height: 94dvh;
+    width: 25dvw;
+    transition: all 0.6s;
+}
+
+#examListTitle {
+    background-color: white;
+    color: #0000db;
+    padding: 0.5rem;
+    font-weight: bolder;
+}
+
+#examListQuestionsList {
+    margin-top: 0.8rem;
+    max-height: 85dvh;
+    overflow-y: auto;
+}
+
+#examListCloseButton {
+    float: right;
+    margin-right: 0.5rem;
+    cursor: pointer;
 }

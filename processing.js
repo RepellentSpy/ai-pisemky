@@ -108,10 +108,8 @@ function handleAnswerClick(answer) {
     const isCorrect = answer.startsWith(currentQuestion.correctAnswer);
 
     if (isCorrect) {
-        alert("Správná odpověď!");
         correctQuestionAmount++;
     } else {
-        alert(`Špatná odpověď! Správná odpověď byla: ${currentQuestion.correctAnswer}`);
         incorrectQuestionAmount++;
     }
 
@@ -128,4 +126,17 @@ function handleAnswerClick(answer) {
         document.getElementById("output").innerHTML = '<a style="color: #53ac9e">' + correctQuestionAmount + ' / ' + examQuestions.length + ' Správně</a>' + '<br>' + '<a style="color: #cf7644">' + incorrectQuestionAmount + ' / ' + examQuestions.length + ' Špatně';
         document.getElementById("output").innerHTML += "<br>" + "Úspěšnost: " + (10 - incorrectQuestionAmount)*10 + "%";
     }
+}
+
+function ListExam() {
+    console.log("Attempting to list exam");
+    document.getElementById("examListDiv").style.right = "0.5rem";
+    // Vybere všechny vhodné prvky z pole ExamQuestions a zobrazí je
+    for (let i = 0; i < examQuestions.length; i++) {
+        document.getElementById("examListQuestionsList").innerHTML += (i + 1) + ". "+ examQuestions[i].question + "<br>" + examQuestions[i].answers[0] + "<br>" + examQuestions[i].answers[1] + "<br>" + examQuestions[i].answers[2] + "<br> Správně: " + examQuestions[i].correctAnswer + "<br><br>";
+    }
+}
+
+function closeExamList() {
+    document.getElementById("examListDiv").style.right = "-125.5rem";
 }
