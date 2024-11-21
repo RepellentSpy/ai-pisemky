@@ -133,3 +133,7 @@ button:active {
     cursor: pointer;
     font-weight: bold;
 }
+
+#examShareButton:hover {
+    background-color: rgb(225, 225, 255);
+}
