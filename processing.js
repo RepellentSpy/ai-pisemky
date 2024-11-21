@@ -1,3 +1,5 @@
+window.AImodel = "gemini-1.5-flash";
+
 // Určování obtížnosti testu
 window.difficultyText = "Základní úroveň"; // nastavení výchozí úrovně jako základní, kdyby náhodou uživatel žádnou nevybral
 const difficultyDropdown = document.getElementById('difficultyDropdown');
@@ -22,28 +24,13 @@ difficultyDropdown.addEventListener('change', function () {
     }
 });
 
-// Určování jaký model využít
-window.AImodel = "gemini-1.5-flash"; // nastavení výchozího modelu jako flash
-//const qualityDropdown = document.getElementById('qualityDropdown');
-//qualityDropdown.addEventListener('change', function () {
-//    selectedQuality = qualityDropdown.value;
-//
-//    if (selectedQuality == 1) {
-//        window.AImodel = "gemini-1.5-flash";
-//        console.log("model: " + window.AImodel);
-//    }
-//    if (selectedQuality == 2) {
-//        window.AImodel = "gemini-1.5-pro";
-//        console.log("model: " + window.AImodel);
-//    }
-//});
-
 let currentQuestionIndex = 0;  // Aktuální index otázky
 
 // Pole, ve kterém budou uloženy otázky vygenerovány Gemini
 let examQuestions = [];
 
 function generateExam() {
+    examQuestions = [];
     document.getElementById("question_number_text").innerHTML = "Otázka 1";
     
     // parsovat HTML, abychom získali důležité informace z výstupu od Gemini
@@ -66,10 +53,10 @@ function generateExam() {
 
         // Zpracování odpovědí (správná odpověď je oddělena dvěma mezerami a uvnitř dvou vykřičníků - !a!)
         lines.slice(1).forEach(line => {
-            if (/^![a-g]!/.test(line)) {
+            if (/^![a-c]!/.test(line)) {
                 // Detekovat správnou odpověď
-                correctAnswer = line.match(/^!([a-g])!/)[1] + ')'; // Extrahovat správnou odpověď, např. "b)"
-                answers.push(line.replace(/^![a-g]!/, '').trim()); // Odstranit vykřičníky
+                correctAnswer = line.match(/^!([a-c])!/)[1] + ')'; // Extrahovat správnou odpověď, např. "b)"
+                answers.push(line.replace(/^![a-c]!/, '').trim()); // Odstranit vykřičníky
             } else {
                 answers.push(line); // Přidat běžnou odpověď
             }
