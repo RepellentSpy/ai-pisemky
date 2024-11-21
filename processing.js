@@ -73,6 +73,20 @@ function generateExam() {
         displayQuestion();
     }
     console.log(examQuestions); // DEBUG!
+
+}
+
+function encode() {
+    // ------------------------------------------------------
+    // EXPERIMENT - Zakódovat pole s otázkami do base64 pro přenos
+    const jsonString = JSON.stringify(examQuestions);
+    console.log(jsonString);
+    const base64Encoded = btoa(unescape(encodeURIComponent(jsonString)));
+    console.log("ENCODED ARRAY")
+    console.log(base64Encoded);
+
+    // EXPERIMENT PART 2 - v dekóderu!
+    //-----------------------------------------------------------
 }
 
 function displayQuestion() {
@@ -142,12 +156,13 @@ function closeExamList() {
 }
 
 function shareQuestions() {
-    let randomHexColor = Math.floor(Math.random()*16777215).toString(16);
-    let result           = '';
-    let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let charactersLength = characters.length;
-    for ( let i = 0; i < 20; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    }
-    console.log("Heslo testu: " + randomHexColor + "-" + result);
+    //let randomHexColor = Math.floor(Math.random()*16777215).toString(16);
+    //let result           = '';
+    //let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    //let charactersLength = characters.length;
+    //for ( let i = 0; i < 20; i++ ) {
+    //  result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    //}
+    //console.log("Heslo testu: " + randomHexColor + "-" + result);
+    encode();
 }
