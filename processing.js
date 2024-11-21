@@ -44,26 +44,38 @@ let currentQuestionIndex = 0;  // Aktuální index otázky
 let examQuestions = [];
 
 function generateExam() {
-    // parsovat HTML abychom získali důležité informace z výstupu od Gemini
+    // parsovat HTML, abychom získali důležité informace z výstupu od Gemini
     const parser = new DOMParser();
     const doc = parser.parseFromString(window.ExamOutput, 'text/html');
     const rawText = doc.body.textContent.trim();
 
-    // Rozdělit text dvěma novými řádky (předpokládá, že jsou otázky odděleny volným řádkem)
+    // Rozdělit text dvěma novými řádky (předpokládá, že otázky jsou odděleny prázdným řádkem)
     const questionBlocks = rawText.split('\n\n').map(block => block.trim());
 
-    // Zpracování každého bloku (otázky + odpovědi)
+    // Zpracování každého bloku (otázka + odpovědi)
     questionBlocks.forEach(block => {
         // Rozdělit blok do řádků (první řádek je otázka, ostatní odpovědi)
         const lines = block.split('\n').map(line => line.trim());
 
         // Oddělit otázku od její odpovědí
         const question = lines[0]; // První řádek je otázka
-        const answers = lines.slice(1).filter(line => /^[a-d]\)/.test(line)); // Zbývající řádky mají prefix od a-d
+        const answers = [];
+        let correctAnswer = null;
+
+        // Zpracování odpovědí (správná odpověď je oddělena dvěma mezerami a uvnitř dvou vykřičníků - !a!)
+        lines.slice(1).forEach(line => {
+            if (/^![a-d]!/.test(line)) {
+                // Detekovat správnou odpověď
+                correctAnswer = line.match(/^!([a-d])!/)[1] + ')'; // Extrahovat správnou odpověď, např. "b)"
+                answers.push(line.replace(/^![a-d]!/, '').trim()); // Odstranit vykřičníky
+            } else {
+                answers.push(line); // Přidat běžnou odpověď
+            }
+        });
 
         // Přidat do pole
-        if (question && answers.length > 0) {
-            examQuestions.push({ question, answers });
+        if (question && answers.length > 0 && correctAnswer) {
+            examQuestions.push({ question, answers, correctAnswer });
         }
     });
 
@@ -73,6 +85,7 @@ function generateExam() {
     }
     console.log(examQuestions); // DEBUG!
 }
+
 
 function displayQuestion() {
     const outputElement = document.getElementById("output");
@@ -97,8 +110,16 @@ function displayQuestion() {
 }
 
 function handleAnswerClick(answer) {
-    // Co se stane po kliknutí na odpověď
-    alert(`You selected: ${answer}`);
+    const currentQuestion = examQuestions[currentQuestionIndex];
+
+    // Zjistit, jestli odpověď uživatele odpovídá správné odpovědi
+    const isCorrect = answer.startsWith(currentQuestion.correctAnswer);
+
+    if (isCorrect) {
+        alert("Správná odpověď!");
+    } else {
+        alert(`Špatná odpověď! Správná odpověď byla: ${currentQuestion.correctAnswer}`);
+    }
 
     // Přejít na další otázku
     currentQuestionIndex++;
