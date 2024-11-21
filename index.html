@@ -10,7 +10,8 @@
 
 <body>
   <main>
-    <h1>Generátor testů</h1>
+    <h1 id="website_title">[ Generátor testů ]</h1>
+    <!-- <button onclick="generateExam()">[DEBUG] Rozřadit</button> -->
     <form>
       <div class="prompt-box">
         <label>
@@ -22,20 +23,18 @@
             <option value="3">Vysokoškolská úroveň</option>
             <option value="4">Expertní úroveň</option>
           </select>
-          <select id="qualityDropdown">
+          <!-- <select id="qualityDropdown">
             <option disabled selected value> -- Vybrat kvalitu -- </option>
             <option value="1">Rychle</option>
             <option value="2">Pomalu s kvalitnějšími otázkami</option>
-          </select>
+          </select> -->
         </label>
         <button type="submit">Generovat</button>
       </div>
     </form>
-    <h2 id="question_number_text">Otázka 1</h2>
+    <h2 id="question_number_text">Čekání na vstup...</h2>
     <p class="output" id="output"></p>
   </main>
-
-  <button onclick="generateExam()">Rozřadit</button>
 
   <script type="module" src="/main.js"></script>
   <script src="/processing.js"></script>

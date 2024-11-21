@@ -24,19 +24,19 @@ difficultyDropdown.addEventListener('change', function () {
 
 // Určování jaký model využít
 window.AImodel = "gemini-1.5-flash"; // nastavení výchozího modelu jako flash
-const qualityDropdown = document.getElementById('qualityDropdown');
-qualityDropdown.addEventListener('change', function () {
-    selectedQuality = qualityDropdown.value;
-
-    if (selectedQuality == 1) {
-        window.AImodel = "gemini-1.5-flash";
-        console.log("model: " + window.AImodel);
-    }
-    if (selectedQuality == 2) {
-        window.AImodel = "gemini-1.5-pro-002";
-        console.log("model: " + window.AImodel);
-    }
-});
+//const qualityDropdown = document.getElementById('qualityDropdown');
+//qualityDropdown.addEventListener('change', function () {
+//    selectedQuality = qualityDropdown.value;
+//
+//    if (selectedQuality == 1) {
+//        window.AImodel = "gemini-1.5-flash";
+//        console.log("model: " + window.AImodel);
+//    }
+//    if (selectedQuality == 2) {
+//        window.AImodel = "gemini-1.5-pro";
+//        console.log("model: " + window.AImodel);
+//    }
+//});
 
 let currentQuestionIndex = 0;  // Aktuální index otázky
 
@@ -44,6 +44,8 @@ let currentQuestionIndex = 0;  // Aktuální index otázky
 let examQuestions = [];
 
 function generateExam() {
+    document.getElementById("question_number_text").innerHTML = "Otázka 1";
+    
     // parsovat HTML, abychom získali důležité informace z výstupu od Gemini
     const parser = new DOMParser();
     const doc = parser.parseFromString(window.ExamOutput, 'text/html');
@@ -86,7 +88,6 @@ function generateExam() {
     console.log(examQuestions); // DEBUG!
 }
 
-
 function displayQuestion() {
     const outputElement = document.getElementById("output");
     outputElement.innerHTML = '';  // Smazat předchozí obsah
@@ -109,6 +110,10 @@ function displayQuestion() {
     });
 }
 
+// výchozí stav proměnných
+let correctQuestionAmount = 0;
+let incorrectQuestionAmount = 0;
+
 function handleAnswerClick(answer) {
     const currentQuestion = examQuestions[currentQuestionIndex];
 
@@ -117,8 +122,10 @@ function handleAnswerClick(answer) {
 
     if (isCorrect) {
         alert("Správná odpověď!");
+        correctQuestionAmount++;
     } else {
         alert(`Špatná odpověď! Správná odpověď byla: ${currentQuestion.correctAnswer}`);
+        incorrectQuestionAmount++;
     }
 
     // Přejít na další otázku
@@ -130,7 +137,8 @@ function handleAnswerClick(answer) {
         displayQuestion();  // Pokud ano, zobrazit další
     } else {
         // Pokud ne, zobrazit zprávu
-        document.getElementById("output").innerHTML = 'Test dokončen!';
-        document.getElementById("question_number_text").style.visibility = "hidden";
+        document.getElementById("question_number_text").innerHTML = "Test dokončen!";
+        document.getElementById("output").innerHTML = '<a style="color: #53ac9e">' + correctQuestionAmount + ' / ' + examQuestions.length + ' Správně</a>' + '<br>' + '<a style="color: #cf7644">' + incorrectQuestionAmount + ' / ' + examQuestions.length + ' Špatně';
+        document.getElementById("output").innerHTML += "<br>" + "Úspěšnost: " + (10 - incorrectQuestionAmount)*10 + "%";
     }
 }

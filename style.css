@@ -1,29 +1,63 @@
 /* Fonty */
-@import url('https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Host+Grotesk:ital,wght@0,300..800;1,300..800&family=Inconsolata:wght@200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Doto:wght@100..900&display=swap');
 
 * {
-    font-family: "Host Grotesk", sans-serif;
+    font-family: "Inconsolata", sans-serif;
+}
+
+#website_title {
+    font-family: "Doto";
+    font-size: 3rem;
 }
 
 body {
     padding: 1rem;
+    background-color: #1e262d;
+    border: 3px solid #cf7644;
+    transition: all 1s;
+    color: #e8dbb7;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e252e;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ebdbb2;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ff8037;
 }
 
 #prompt_input {
     padding: 0.5rem;
     border-radius: 0;
     border-style: solid;
-    border-color: black;
+    border-color: #e8dbb7;
+    background-color: transparent;
+    color: #e8dbb7;
     width: 40rem;
     margin-top: 1rem;
 }
 
-#answeramount_input {
+#difficultyDropdown {
     padding: 0.5rem;
     border-radius: 0;
     border-style: solid;
-    border-color: black;
-    width: 10rem;
+    border-color: #e8dbb7;
+    background-color: transparent;
+    color: #e8dbb7;
+    width: 13rem;
+    text-align: center;
     margin-top: 1rem;
 }
 
@@ -33,17 +67,17 @@ button {
     padding-right: 0.8rem;
     border-radius: 0;
     border-style: solid;
-    border-color: black;
-    background-color: black;
-    color: white;
+    border-color: #e8dbb7;
+    background-color: #e8dbb7;
+    color: #1e262d;
     cursor: pointer;
     margin-bottom: 1rem;
 }
 
 button:hover {
-    background-color: rgb(24, 24, 24);
+    background-color: #d8cba7;
 }
 
 button:active {
-    background-color: rgb(31, 31, 31);
+    background-color: #c5b68e;
 }

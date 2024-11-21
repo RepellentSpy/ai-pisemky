@@ -9,13 +9,11 @@ let output = document.querySelector('.output');
 
 form.onsubmit = async (ev) => {
   ev.preventDefault();
-  output.textContent = 'Generování...';
+  document.getElementById("question_number_text").textContent = 'Generování...';
 
   try {
-    //let config = "You are an LLM designed to create exams and tests. You write in Czech. You write concise questions on a college level. DO NOT WRITE TITLES. Generate 10 questions. Your questions should be hard to answer. You say nothing except the test questions and 3 answers. The numbers go up sequentially from 1-10. Please create a test on the topic of "
-    let config = "Jsi velký jazykový model nadesignovaný k vytváření testů a písemek. Píšeš česky. Píšeš stručné otázky na úrovni: " + window.difficultyText + ". NEPIŠ NADPISY. Vygeneruj 10 otázek. Tvé otázky by měly být těžké k zodpovězení. Neříkej nic jiného než testové otázky, 3 odpovědi a jaká je správná. Každou odpověď napiš na nový řádek. Každá odpověď by před sebou měla mít písmeno a závorku - a). Na konec řádku napiš písmeno správné odpovědi ohraničeno vykřičníkem z obou stran. Správná odpověď bude tudíž vypadat například takto: !c! .Správná odpověď by od poslední odpovědi měla být oddělena dvěma mezerami. Čísla otázek po sobě jdou sekvenčně od 1-10. Prosím vytvoř test na téma: ";
+    let config = "Jsi velký jazykový model nadesignovaný k vytváření testů a písemek. Píšeš česky. Píšeš stručné otázky na úrovni: " + window.difficultyText + ". NEPIŠ NADPISY. Vygeneruj 10 otázek. Tvé otázky by měly být těžké k zodpovězení. Neříkej nic jiného než testové otázky, 3 odpovědi a jaká je správná. Každou odpověď napiš na nový řádek. Každá odpověď by před sebou měla mít písmeno a závorku - a). Po třech odpovědích napiš za dvě mezery písmeno správné odpovědi uvnitř vykřičníků. Správná odpověď bude tudíž vypadat například takto: !c! .Správná odpověď by od poslední odpovědi měla být oddělena dvěma mezerami. SPRÁVNÁ ODPOVĚĎ JE SOUČÁSTÍ SEZNAMU ODPOVĚDÍ. Odpověď ve vykřičnících napiš hned za poslední odpověď, žádný nový řádek. Čísla otázek po sobě jdou sekvenčně od 1-10. Prosím vytvoř test na téma: ";
     console.log("Prompt: " +  config);
-    // Přidat možnosti úrovně obtížnosti (roletka třída)
     let contents = [
       {
         role: 'user',
@@ -46,9 +44,12 @@ form.onsubmit = async (ev) => {
       buffer.push(response.text());
       window.ExamOutput = md.render(buffer.join(''));
       console.log("generation part finished");
-      console.log(window.ExamOutput);
+      console.log(window.ExamOutput); // DEBUG!!!!!!!!!!!!!!!
     }
   } catch (e) {
     output.innerHTML += '<hr>' + e;
   }
+  await console.log("Generation finished");
+  generateExam();
 };
+
