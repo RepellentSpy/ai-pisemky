@@ -23,13 +23,13 @@ difficultyDropdown.addEventListener('change', function () {
 });
 
 // Určování jaký model využít
-window.AImodel = "gemini-1.5-flash-8b"; // nastavení výchozího modelu jako flash
+window.AImodel = "gemini-1.5-flash"; // nastavení výchozího modelu jako flash
 const qualityDropdown = document.getElementById('qualityDropdown');
 qualityDropdown.addEventListener('change', function () {
     selectedQuality = qualityDropdown.value;
 
     if (selectedQuality == 1) {
-        window.AImodel = "gemini-1.5-flash-8b";
+        window.AImodel = "gemini-1.5-flash";
         console.log("model: " + window.AImodel);
     }
     if (selectedQuality == 2) {
@@ -64,10 +64,10 @@ function generateExam() {
 
         // Zpracování odpovědí (správná odpověď je oddělena dvěma mezerami a uvnitř dvou vykřičníků - !a!)
         lines.slice(1).forEach(line => {
-            if (/^![a-d]!/.test(line)) {
+            if (/^![a-g]!/.test(line)) {
                 // Detekovat správnou odpověď
-                correctAnswer = line.match(/^!([a-d])!/)[1] + ')'; // Extrahovat správnou odpověď, např. "b)"
-                answers.push(line.replace(/^![a-d]!/, '').trim()); // Odstranit vykřičníky
+                correctAnswer = line.match(/^!([a-g])!/)[1] + ')'; // Extrahovat správnou odpověď, např. "b)"
+                answers.push(line.replace(/^![a-g]!/, '').trim()); // Odstranit vykřičníky
             } else {
                 answers.push(line); // Přidat běžnou odpověď
             }

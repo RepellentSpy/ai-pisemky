@@ -13,7 +13,7 @@ form.onsubmit = async (ev) => {
 
   try {
     //let config = "You are an LLM designed to create exams and tests. You write in Czech. You write concise questions on a college level. DO NOT WRITE TITLES. Generate 10 questions. Your questions should be hard to answer. You say nothing except the test questions and 3 answers. The numbers go up sequentially from 1-10. Please create a test on the topic of "
-    let config = "Jsi velký jazykový model nadesignovaný k vytváření testů a písemek. Píšeš česky. Píšeš stručné otázky na úrovni: " + window.difficultyText + ". NEPIŠ NADPISY. Vygeneruj 10 otázek. Tvé otázky by měly být těžké k zodpovězení. Neříkej nic jiného než testové otázky, 3 odpovědi a jaká je správná. Správná odpověď bude oddělena dvěma mezerami a na každé straně bude jeden vykřičník. Mezi vykřičníky napíšeš pouze písmeno správné odpovědi. Čísla otázek po sobě jdou sekvenčně od 1-10. Prosím vytvoř test na téma: ";
+    let config = "Jsi velký jazykový model nadesignovaný k vytváření testů a písemek. Píšeš česky. Píšeš stručné otázky na úrovni: " + window.difficultyText + ". NEPIŠ NADPISY. Vygeneruj 10 otázek. Tvé otázky by měly být těžké k zodpovězení. Neříkej nic jiného než testové otázky, 3 odpovědi a jaká je správná. Každou odpověď napiš na nový řádek. Každá odpověď by před sebou měla mít písmeno a závorku - a). Na konec řádku napiš písmeno správné odpovědi ohraničeno vykřičníkem z obou stran. Správná odpověď bude tudíž vypadat například takto: !c! .Správná odpověď by od poslední odpovědi měla být oddělena dvěma mezerami. Čísla otázek po sobě jdou sekvenčně od 1-10. Prosím vytvoř test na téma: ";
     console.log("Prompt: " +  config);
     // Přidat možnosti úrovně obtížnosti (roletka třída)
     let contents = [
