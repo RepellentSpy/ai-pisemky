@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Test generator</title>
+</head>
+
+<body>
+  <main>
+    <h1>Test generator</h1>
+    <form>
+      <div class="prompt-box">
+        <label>
+          <input name="prompt" placeholder="Test topic" type="text" value="">
+        </label>
+        <button type="submit">Submit</button>
+      </div>
+    </form>
+    <p class="output" id="output"></p>
+  </main>
+
+  <button onclick="generateExam()">Rozřadit</button>
+
+  <script type="module" src="/main.js"></script>
+  <script src="/processing.js"></script>
+</body>
+
+</html>
