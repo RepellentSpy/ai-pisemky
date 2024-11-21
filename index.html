@@ -10,7 +10,7 @@
 
 <body>
   <main>
-    <h1 id="website_title">[ Generátor testů ]</h1>
+    <h1 id="website_title" onclick="window.location.reload()">[ Generátor testů ]</h1>
     <!-- <button onclick="generateExam()">[DEBUG] Rozřadit</button> -->
     <form>
       <div class="prompt-box">
@@ -31,16 +31,17 @@
     <p class="output" id="output"></p>
   </main>
 
-  <button id="listExamButton" onclick="ListExam()">ListExam</button>
+  <button id="listExamButton" onclick="ListExam()">Správa testových otázek</button>
 
-  <div id="examListDiv">
+  <main id="examListDiv">
     <div id="examListHeader">
     <div id="examListTitle">
       <b>Testové otázky</b>
       <b id="examListCloseButton" onclick="closeExamList()">X</b>
     </div>
     <div id="examListQuestionsList" class="scrollable"></div>
-  </div>
+    <div id="examShareButton" onclick="shareQuestions()">Sdílet test</div>
+  </main>
 
   <script type="module" src="/main.js"></script>
   <script src="/processing.js"></script>

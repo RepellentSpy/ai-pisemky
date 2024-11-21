@@ -140,3 +140,14 @@ function ListExam() {
 function closeExamList() {
     document.getElementById("examListDiv").style.right = "-125.5rem";
 }
+
+function shareQuestions() {
+    let randomHexColor = Math.floor(Math.random()*16777215).toString(16);
+    let result           = '';
+    let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let charactersLength = characters.length;
+    for ( let i = 0; i < 20; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    console.log("Heslo testu: " + randomHexColor + "-" + result);
+}

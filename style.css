@@ -9,6 +9,8 @@
 #website_title {
     font-family: "Doto";
     font-size: 3rem;
+    user-select: none;
+    cursor: pointer;
 }
 
 body {
@@ -27,12 +29,12 @@ body {
 
 ::-webkit-scrollbar-track {
   background: #1e252e;
-  border-radius: 5px;
+  border-radius: 0;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #ebdbb2;
-  border-radius: 5px;
+  background: #ffffff;
+  border-radius: 0;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -118,4 +120,16 @@ button:active {
     float: right;
     margin-right: 0.5rem;
     cursor: pointer;
+}
+
+#examShareButton {
+    position: fixed;
+    background-color: white;
+    padding: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    color: #0000db;
+    bottom: 2rem;
+    cursor: pointer;
+    font-weight: bold;
 }
