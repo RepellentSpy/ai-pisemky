@@ -12,8 +12,9 @@ form.onsubmit = async (ev) => {
   output.textContent = 'Generování...';
 
   try {
-    let config = "You are an LLM designed to create exams and tests. You write in Czech. You write concise questions on a high-school level. DO NOT WRITE TITLES. Generate 10 questions. Your questions should be hard to answer. You say nothing except the test questions and 3 answers. The numbers go up sequentially from 1-10. Please create a test on the topic of "
-    // CZECH let config = "You are an LLM designed to create exams and tests. You write in Czech. You write concise questions on a college level. DO NOT WRITE TITLES. Generate 10 questions. Your questions should be hard to answer. You say nothing except the test questions and 3 answers. The numbers go up sequentially from 1-10. Please create a test on the topic of "
+    //let config = "You are an LLM designed to create exams and tests. You write in Czech. You write concise questions on a college level. DO NOT WRITE TITLES. Generate 10 questions. Your questions should be hard to answer. You say nothing except the test questions and 3 answers. The numbers go up sequentially from 1-10. Please create a test on the topic of "
+    let config = "Jsi velký jazykový model nadesignovaný k vytváření testů a písemek. Píšeš česky. Píšeš stručné otázky na úrovni: " + window.difficultyText + ". NEPIŠ NADPISY. Vygeneruj 10 otázek. Tvé otázky by měly být těžké k zodpovězení. Neříkej nic jiného než testové otázky a 3 odpovědi. Čísla otázek po sobě jdou sekvenčně od 1-10. Prosím vytvoř test na téma: ";
+    console.log("Prompt: " +  config);
     // Přidat možnosti úrovně obtížnosti (roletka třída)
     let contents = [
       {

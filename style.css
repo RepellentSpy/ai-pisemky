@@ -15,6 +15,16 @@ body {
     border-style: solid;
     border-color: black;
     width: 40rem;
+    margin-top: 1rem;
+}
+
+#answeramount_input {
+    padding: 0.5rem;
+    border-radius: 0;
+    border-style: solid;
+    border-color: black;
+    width: 10rem;
+    margin-top: 1rem;
 }
 
 button {

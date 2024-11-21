@@ -1,3 +1,28 @@
+// Určování obtížnosti testu
+window.difficultyText = "Základní úroveň"; // nastavení výchozí úrovně jako základní, kdyby náhodou uživatel žádnou nevybral
+const difficultyDropdown = document.getElementById('difficultyDropdown');
+difficultyDropdown.addEventListener('change', function () {
+    selectedDifficulty = difficultyDropdown.value;
+    console.log(`Vybrána obtížnost: ${selectedDifficulty}`);
+
+    if (selectedDifficulty == 1) {
+        window.difficultyText = "Základní úroveň";
+        console.log(window.difficultyText);
+    }
+    else if (selectedDifficulty == 2) {
+        window.difficultyText = "Středoškolská úroveň";
+        console.log(window.difficultyText);
+    }
+    else if (selectedDifficulty == 3) {
+        window.difficultyText = "Vysokoškolská úroveň";
+        console.log(window.difficultyText);
+    }
+    else if (selectedDifficulty == 4) {
+        window.difficultyText = "Expertní úroveň";
+        console.log(window.difficultyText);
+    }
+});
+
 let currentQuestionIndex = 0;  // Aktuální index otázky
 
 // Pole, ve kterém budou uloženy otázky vygenerovány Gemini
@@ -36,16 +61,16 @@ function generateExam() {
 
 function displayQuestion() {
     const outputElement = document.getElementById("output");
-    outputElement.innerHTML = '';  // Clear any previous content
+    outputElement.innerHTML = '';  // Smazat předchozí obsah
 
-    const { question, answers } = examQuestions[currentQuestionIndex];
+    let { question, answers } = examQuestions[currentQuestionIndex];
 
-    // Create and append the question paragraph
+    // Vytvořit a přidat informace do otázkového odstavce
     const questionParagraph = document.createElement("p");
     questionParagraph.textContent = question;
     outputElement.appendChild(questionParagraph);
 
-    // Create and append buttons for each answer
+    // Vytvořit a přidat tlačítka
     answers.forEach(answer => {
         const answerDiv = document.createElement("div");
         const button = document.createElement("button");
@@ -57,18 +82,18 @@ function displayQuestion() {
 }
 
 function handleAnswerClick(answer) {
-    // When an answer is clicked, show an alert (or log the answer for now)
+    // Co se stane po kliknutí na odpověď
     alert(`You selected: ${answer}`);
 
-    // Move to the next question
+    // Přejít na další otázku
     currentQuestionIndex++;
     document.getElementById("question_number_text").innerHTML = `Otázka ${currentQuestionIndex + 1}`;
 
-    // Check if there are more questions to display
+    // Zkontrolovat, jestli je další otázka k zobrazení
     if (currentQuestionIndex < examQuestions.length) {
-        displayQuestion();  // Display the next question
+        displayQuestion();  // Pokud ano, zobrazit další
     } else {
-        // No more questions, show a "completed" message
+        // Pokud ne, zobrazit zprávu
         document.getElementById("output").innerHTML = 'Test dokončen!';
         document.getElementById("question_number_text").style.visibility = "hidden";
     }
