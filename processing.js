@@ -3,23 +3,38 @@ window.difficultyText = "Základní úroveň"; // nastavení výchozí úrovně 
 const difficultyDropdown = document.getElementById('difficultyDropdown');
 difficultyDropdown.addEventListener('change', function () {
     selectedDifficulty = difficultyDropdown.value;
-    console.log(`Vybrána obtížnost: ${selectedDifficulty}`);
 
     if (selectedDifficulty == 1) {
         window.difficultyText = "Základní úroveň";
-        console.log(window.difficultyText);
+        console.log("obtížnost: " + window.difficultyText);
     }
     else if (selectedDifficulty == 2) {
         window.difficultyText = "Středoškolská úroveň";
-        console.log(window.difficultyText);
+        console.log("obtížnost: " + window.difficultyText);
     }
     else if (selectedDifficulty == 3) {
         window.difficultyText = "Vysokoškolská úroveň";
-        console.log(window.difficultyText);
+        console.log("obtížnost: " + window.difficultyText);
     }
     else if (selectedDifficulty == 4) {
         window.difficultyText = "Expertní úroveň";
-        console.log(window.difficultyText);
+        console.log("obtížnost: " + window.difficultyText);
+    }
+});
+
+// Určování jaký model využít
+window.AImodel = "gemini-1.5-flash-8b"; // nastavení výchozího modelu jako flash
+const qualityDropdown = document.getElementById('qualityDropdown');
+qualityDropdown.addEventListener('change', function () {
+    selectedQuality = qualityDropdown.value;
+
+    if (selectedQuality == 1) {
+        window.AImodel = "gemini-1.5-flash-8b";
+        console.log("model: " + window.AImodel);
+    }
+    if (selectedQuality == 2) {
+        window.AImodel = "gemini-1.5-pro-002";
+        console.log("model: " + window.AImodel);
     }
 });
 

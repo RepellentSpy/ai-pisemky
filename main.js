@@ -28,8 +28,7 @@ form.onsubmit = async (ev) => {
     // Předat prompt modelu a získat výstup
     const genAI = new GoogleGenerativeAI(API_KEY);
     const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-flash-8b", // nebo gemini-1.5-pro nebo gemini-1.5-pro-002 nebo gemini-1.5-flash nebo gemini-1.5-flash-8b
-      // ToDo: Přidat možnost výměny flash za pro
+      model: window.AImodel,
       safetySettings: [
         {
           category: HarmCategory.HARM_CATEGORY_HARASSMENT,
