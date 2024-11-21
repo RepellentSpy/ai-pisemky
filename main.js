@@ -1,6 +1,5 @@
 import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
 import MarkdownIt from 'markdown-it';
-import './style.css';
 
 let API_KEY = 'AIzaSyAi7i8Wh7W_aDUgzPXaDn7E1MjphJtW_fs';
 
@@ -10,10 +9,12 @@ let output = document.querySelector('.output');
 
 form.onsubmit = async (ev) => {
   ev.preventDefault();
-  output.textContent = 'Generating...';
+  output.textContent = 'Generování...';
 
   try {
-    let config = "You are an LLM designed to create exams and tests. You write concise questions on a college level. DO NOT WRITE TITLES. Generate 10 questions. Your questions should be hard to answer. You say nothing except the test questions and 3 answers. The numbers go up sequentially from 1-10. Please create a test on the topic of "
+    let config = "You are an LLM designed to create exams and tests. You write in Czech. You write concise questions on a high-school level. DO NOT WRITE TITLES. Generate 10 questions. Your questions should be hard to answer. You say nothing except the test questions and 3 answers. The numbers go up sequentially from 1-10. Please create a test on the topic of "
+    // CZECH let config = "You are an LLM designed to create exams and tests. You write in Czech. You write concise questions on a college level. DO NOT WRITE TITLES. Generate 10 questions. Your questions should be hard to answer. You say nothing except the test questions and 3 answers. The numbers go up sequentially from 1-10. Please create a test on the topic of "
+    // Přidat možnosti úrovně obtížnosti (roletka třída)
     let contents = [
       {
         role: 'user',
@@ -23,10 +24,11 @@ form.onsubmit = async (ev) => {
       }
     ];
 
-    // Call the multimodal model, and get a stream of results
+    // Předat prompt modelu a získat výstup
     const genAI = new GoogleGenerativeAI(API_KEY);
     const model = genAI.getGenerativeModel({
-      model: "gemini-1.5-pro-002", // or gemini-1.5-pro
+      model: "gemini-1.5-flash-8b", // nebo gemini-1.5-pro nebo gemini-1.5-pro-002 nebo gemini-1.5-flash nebo gemini-1.5-flash-8b
+      // ToDo: Přidat možnost výměny flash za pro
       safetySettings: [
         {
           category: HarmCategory.HARM_CATEGORY_HARASSMENT,
@@ -37,13 +39,13 @@ form.onsubmit = async (ev) => {
 
     const result = await model.generateContentStream({ contents });
 
-    // Read from the stream and interpret the output as markdown
+    // Přečíst výstup a interpretovat jako markdown
     let buffer = [];
     let md = new MarkdownIt();
     for await (let response of result.stream) {
       buffer.push(response.text());
       window.ExamOutput = md.render(buffer.join(''));
-      console.log("generation finished");
+      console.log("generation part finished");
     }
   } catch (e) {
     output.innerHTML += '<hr>' + e;

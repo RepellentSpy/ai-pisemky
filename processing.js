@@ -34,7 +34,6 @@ function generateExam() {
     console.log(examQuestions); // DEBUG!
 }
 
-
 function displayQuestion() {
     const outputElement = document.getElementById("output");
     outputElement.innerHTML = '';  // Clear any previous content
@@ -48,10 +47,12 @@ function displayQuestion() {
 
     // Create and append buttons for each answer
     answers.forEach(answer => {
+        const answerDiv = document.createElement("div");
         const button = document.createElement("button");
         button.textContent = answer;
         button.onclick = () => handleAnswerClick(answer);
-        outputElement.appendChild(button);
+        answerDiv.appendChild(button);
+        outputElement.appendChild(answerDiv);
     });
 }
 
@@ -61,12 +62,14 @@ function handleAnswerClick(answer) {
 
     // Move to the next question
     currentQuestionIndex++;
+    document.getElementById("question_number_text").innerHTML = `Otázka ${currentQuestionIndex + 1}`;
 
     // Check if there are more questions to display
     if (currentQuestionIndex < examQuestions.length) {
         displayQuestion();  // Display the next question
     } else {
         // No more questions, show a "completed" message
-        document.getElementById("output").innerHTML = 'You have completed the test!';
+        document.getElementById("output").innerHTML = 'Test dokončen!';
+        document.getElementById("question_number_text").style.visibility = "hidden";
     }
 }
