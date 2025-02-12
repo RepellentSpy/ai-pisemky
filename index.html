@@ -6,19 +6,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Generátor testů</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/x-icon" href="images/favicon2.png">
+  <link rel="icon" type="image/x-icon" href="images/favicon.png">
 </head>
 
 <body>
   <main>
     <h1 id="website_title" onclick="window.location.reload()">[ Generátor testů ]</h1>
+    <h2 id="website_subtitle">Vytvořit test - učitel</h2>
     <!-- <button onclick="generateExam()">[DEBUG] Rozřadit</button> -->
     <form>
       <div class="prompt-box">
         <label>
           <input name="prompt" placeholder="Téma testu" type="text" value="" id="prompt_input">
           <select id="difficultyDropdown">
-            <option disabled selected value> -- Vybrat obtížnost -- </option>
+            <option disabled selected value> -- Zvolit obtížnost -- </option>
             <option value="1">Základní úroveň</option>
             <option value="2">Středoškolská úroveň</option>
             <option value="3">Vysokoškolská úroveň</option>
@@ -28,7 +29,7 @@
         <button type="submit">Generovat</button>
       </div>
     </form>
-    <h2 id="question_number_text">Čekání na vstup...</h2>
+    <h2 id="question_number_text"></h2>
     <p class="output" id="output"></p>
   </main>
 
@@ -37,7 +38,7 @@
   <main id="examListDiv">
     <div id="examListHeader">
     <div id="examListTitle">
-      <b>Testové otázky</b>
+      <b>Otázky a odpovědi</b>
       <b id="examListCloseButton" onclick="closeExamList()">X</b>
     </div>
     <div id="examListQuestionsList" class="scrollable"></div>

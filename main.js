@@ -27,6 +27,7 @@ form.onsubmit = async (ev) => {
     const genAI = new GoogleGenerativeAI(API_KEY);
     const model = genAI.getGenerativeModel({
       model: window.AImodel,
+      temperature: 0,
       safetySettings: [
         {
           category: HarmCategory.HARM_CATEGORY_HARASSMENT,

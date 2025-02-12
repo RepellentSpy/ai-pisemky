@@ -76,19 +76,6 @@ function generateExam() {
 
 }
 
-function encode() {
-    // ------------------------------------------------------
-    // EXPERIMENT - Zakódovat pole s otázkami do base64 pro přenos
-    const jsonString = JSON.stringify(examQuestions);
-    console.log(jsonString);
-    const base64Encoded = btoa(unescape(encodeURIComponent(jsonString)));
-    console.log("ENCODED ARRAY")
-    console.log(base64Encoded);
-
-    // EXPERIMENT PART 2 - v dekóderu!
-    //-----------------------------------------------------------
-}
-
 function displayQuestion() {
     const outputElement = document.getElementById("output");
     outputElement.innerHTML = '';  // Smazat předchozí obsah
@@ -165,4 +152,12 @@ function shareQuestions() {
     //}
     //console.log("Heslo testu: " + randomHexColor + "-" + result);
     encode();
+}
+
+function encode() {
+    let jsonString = JSON.stringify(examQuestions);
+    console.log(jsonString);
+    let base64Encoded = encodeURI(btoa(unescape(encodeURIComponent(jsonString))));
+    console.log("ENCODED ARRAY");
+    console.log(base64Encoded);
 }
