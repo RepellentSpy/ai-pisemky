@@ -91,6 +91,12 @@ button:active {
     right: 1rem;
 }
 
+#loadExamButton {
+    position: fixed;
+    bottom: 0;
+    right: 13rem;
+}
+
 #examListDiv {
     background-color: #0000db;
     color: white;

@@ -143,21 +143,22 @@ function closeExamList() {
 }
 
 function shareQuestions() {
-    //let randomHexColor = Math.floor(Math.random()*16777215).toString(16);
-    //let result           = '';
-    //let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    //let charactersLength = characters.length;
-    //for ( let i = 0; i < 20; i++ ) {
-    //  result += characters.charAt(Math.floor(Math.random() * charactersLength));
-    //}
-    //console.log("Heslo testu: " + randomHexColor + "-" + result);
     encode();
+    document.getElementById("examListQuestionsList").innerHTML = `
+    <b>Kód pro studenty: </b><br>
+    ${window.shareCode}<br>
+    <button id="copyShareCodeButton" style="margin-top: 1rem">Kopírovat</button>
+    `
+    document.getElementById("copyShareCodeButton").onclick = function() {
+        navigator.clipboard.writeText(window.shareCode);
+    }
 }
 
 function encode() {
     let jsonString = JSON.stringify(examQuestions);
     console.log(jsonString);
-    let base64Encoded = encodeURI(btoa(unescape(encodeURIComponent(jsonString))));
+    let base64Encoded = btoa(unescape(encodeURIComponent(jsonString)));
     console.log("ENCODED ARRAY");
     console.log(base64Encoded);
+    window.shareCode = base64Encoded;
 }

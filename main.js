@@ -49,6 +49,7 @@ form.onsubmit = async (ev) => {
     }
   } catch (e) {
     output.innerHTML += '<hr>' + e;
+    window.ExamOutput = "";
   }
   await console.log("Generation finished");
   generateExam();
