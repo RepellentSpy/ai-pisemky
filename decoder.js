@@ -1,17 +1,22 @@
+let currentQuestionIndex = 0;  // Aktuální index otázky
+
 function submitDecode() {
     try {
         let decodeInput = document.getElementById("prompt_input").value;
         let jsonStringDecoded = decodeURIComponent(escape(atob(decodeInput)));
         decodedArray = JSON.parse(jsonStringDecoded);
-        console.log("DECODED ARRAY") //debug
-        console.log(decodedArray);
+        console.log("Úspěšně načteno")
+
+        displayQuestion();
+        document.getElementById("prompt_input").style.display = "none";
+        document.getElementById("submit_button").style.display = "none";
+        document.getElementById("question_number_text").innerHTML = `Otázka 1<br>[] [] [] [] [] [] [] [] [] []`;
     }
     catch(e) {
         console.log("Chyba! Nepovedlo se načíst test");
+        alert("Chyba: tento kód je vadný!");
     }
-    displayQuestion();
 }
-let currentQuestionIndex = 0;  // Aktuální index otázky
 
 function displayQuestion() {
     const outputElement = document.getElementById("output");
@@ -40,28 +45,48 @@ let correctQuestionAmount = 0;
 let incorrectQuestionAmount = 0;
 
 function handleAnswerClick(answer) {
-    const currentQuestion = decodedArray[currentQuestionIndex];
-
-    // Zjistit, jestli odpověď uživatele odpovídá správné odpovědi
-    const isCorrect = answer.startsWith(currentQuestion.correctAnswer);
-
-    if (isCorrect) {
-        correctQuestionAmount++;
-    } else {
-        incorrectQuestionAmount++;
-    }
-
-    // Přejít na další otázku
-    currentQuestionIndex++;
-    document.getElementById("question_number_text").innerHTML = `Otázka ${currentQuestionIndex + 1}`;
-
-    // Zkontrolovat, jestli je další otázka k zobrazení
     if (currentQuestionIndex < decodedArray.length) {
-        displayQuestion();  // Pokud ano, zobrazit další
-    } else {
-        // Pokud ne, zobrazit zprávu
-        document.getElementById("question_number_text").innerHTML = "Test dokončen!";
-        document.getElementById("output").innerHTML = '<a style="color: #53ac9e">' + correctQuestionAmount + ' / ' + decodedArray.length + ' Správně</a>' + '<br>' + '<a style="color: #cf7644">' + incorrectQuestionAmount + ' / ' + decodedArray.length + ' Špatně';
-        document.getElementById("output").innerHTML += "<br>" + "Úspěšnost: " + (10 - incorrectQuestionAmount)*10 + "%";
+        const currentQuestion = decodedArray[currentQuestionIndex];
+
+        // Zjistit, jestli odpověď uživatele odpovídá správné odpovědi
+        const isCorrect = answer.startsWith(currentQuestion.correctAnswer);
+
+        if (isCorrect) {
+            correctQuestionAmount++;
+        } else {
+            incorrectQuestionAmount++;
+        }
+        currentQuestionIndex++;
+
+        // Zkontrolovat přítomnost dalších otázek
+        if (currentQuestionIndex < decodedArray.length) {
+            // Přejít na další otázku
+
+            // Kostičky
+            const filledSquares = currentQuestionIndex + 1;
+
+            // Pole s kostkami
+            const squares = [];
+            for (let i = 1; i < 10; i++) {
+                if (i < filledSquares) {
+                    squares.push("[░]"); // Vyplněná kostka :)
+                } else {
+                    squares.push("[]"); // Prázdná kostka :(
+                }
+            }
+
+            // Spojit kostky do jednoho stringu
+            const squaresString = squares.join(" ");
+            document.getElementById("question_number_text").innerHTML = "Otázka " + (currentQuestionIndex + 1) + "<br>" + squaresString;
+
+            // zobrazit další otázku
+            displayQuestion();
+        } else {
+            // Konec
+            console.log("Zazvonil zvonec a pohádky byl konec");
+            document.getElementById("question_number_text").innerHTML = "Test dokončen!<br>[░] [░] [░] [░] [░] [░] [░] [░] [░] [░]";
+            document.getElementById("output").innerHTML = '<a style="color: #53ac9e">' + correctQuestionAmount + ' / ' + decodedArray.length + ' Správně</a>' + '<br>' + '<a style="color: #cf7644">' + incorrectQuestionAmount + ' / ' + decodedArray.length + ' Špatně';
+            document.getElementById("output").innerHTML += "<br>" + "Úspěšnost: " + (10 - incorrectQuestionAmount)*10 + "%";
+        }
     }
 }

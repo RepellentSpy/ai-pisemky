@@ -77,25 +77,31 @@ function generateExam() {
 }
 
 function displayQuestion() {
-    const outputElement = document.getElementById("output");
-    outputElement.innerHTML = '';  // Smazat předchozí obsah
-
-    let { question, answers } = examQuestions[currentQuestionIndex];
-
-    // Vytvořit a přidat informace do otázkového odstavce
-    const questionParagraph = document.createElement("p");
-    questionParagraph.textContent = question;
-    outputElement.appendChild(questionParagraph);
-
-    // Vytvořit a přidat tlačítka
-    answers.forEach(answer => {
-        const answerDiv = document.createElement("div");
-        const button = document.createElement("button");
-        button.textContent = answer;
-        button.onclick = () => handleAnswerClick(answer);
-        answerDiv.appendChild(button);
-        outputElement.appendChild(answerDiv);
-    });
+    try {
+        const outputElement = document.getElementById("output");
+        outputElement.innerHTML = '';  // Smazat předchozí obsah
+    
+        let { question, answers } = examQuestions[currentQuestionIndex];
+    
+        // Vytvořit a přidat informace do otázkového odstavce
+        const questionParagraph = document.createElement("p");
+        questionParagraph.textContent = question;
+        outputElement.appendChild(questionParagraph);
+    
+        // Vytvořit a přidat tlačítka
+        answers.forEach(answer => {
+            const answerDiv = document.createElement("div");
+            const button = document.createElement("button");
+            button.textContent = answer;
+            button.onclick = () => handleAnswerClick(answer);
+            answerDiv.appendChild(button);
+            outputElement.appendChild(answerDiv);
+        });
+    } catch(e) {
+        console.error(e);
+        window.alert("Chyba v generaci testu! Zkuste to prosím znovu. Po odkliknutí zprávy bude stránka obnovena");
+        window.location.reload();
+    }
 }
 
 // výchozí stav proměnných
