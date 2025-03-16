@@ -1,5 +1,6 @@
 import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from "@google/generative-ai";
 import MarkdownIt from 'markdown-it';
+import * as allProcessing from './processing.js';
 
 let API_KEY = 'AIzaSyAi7i8Wh7W_aDUgzPXaDn7E1MjphJtW_fs';
 
@@ -51,7 +52,7 @@ form.onsubmit = async (ev) => {
     output.innerHTML += '<hr>' + e;
     window.ExamOutput = "";
   }
-  await console.log("Generation finished");
-  generateExam();
+  console.log("Generation finished");
+  allProcessing.generateExam();
 };
 

@@ -1,0 +1,1 @@
+import"./style-78f27d59.js";import{s as i,d as e,h as n}from"./decoder-6f726fea.js";window.submitDecode=i;window.displayQuestion=e;window.handleAnswerClick=n;t();function t(){document.getElementById("submit_button").addEventListener("click",i)}

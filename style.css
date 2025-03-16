@@ -6,7 +6,7 @@
     font-family: "Inconsolata", sans-serif;
 }
 
-#website_title {
+#website_title, #website_title_main {
     font-family: "Doto";
     font-size: 3rem;
     user-select: none;
@@ -15,7 +15,7 @@
 
 body {
     padding: 2rem;
-    padding-top: 1rem;
+    padding-top: 3rem;
     background-color: #1e262d;
     border: 3px solid #cf7644;
     transition: all 1s;
@@ -142,4 +142,51 @@ button:active {
 
 #examShareButton:hover {
     background-color: rgb(225, 225, 255);
+}
+
+@media screen and (max-width: 1000px) { 
+    #prompt_input {
+        width: 100%;
+    }
+
+    #website_title {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    #website_title_main {
+        font-size: 1.7rem;
+        text-align: center;
+    }
+
+    #website_subtitle {
+        text-align: center;
+    }
+
+    #submit_button {
+        margin-top: 1rem;
+        width: 100%;
+    }
+
+    #question_number_text {
+        text-align: center;
+    }
+
+    #generate_button {
+        margin-top: 1rem;
+        width: 100%;
+    }
+
+    #difficultyDropdown {
+        width: 100%;
+    }
+
+    #examListDiv {
+        width: 87%;
+    }
+
+    #popupWindow {
+        display: flex;
+        justify-content: center;
+    }
 }

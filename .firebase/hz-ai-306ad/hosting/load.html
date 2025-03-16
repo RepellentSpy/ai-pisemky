@@ -4,8 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Načíst test</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/x-icon" href="images/favicon2.png">
+  
+  <link rel="icon" type="image/x-icon" href="/assets/favicon2-92c9a36d.png">
+  <script type="module" crossorigin src="/assets/load-d0b039aa.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/style-78f27d59.js">
+  <link rel="modulepreload" crossorigin href="/assets/decoder-6f726fea.js">
+  <link rel="stylesheet" href="/assets/style-cf61c269.css">
 </head>
 
 <body>
@@ -18,18 +22,7 @@
     <p class="output" id="output"></p>
   </main>
   
-<script type="module">
-  import { submitDecode, displayQuestion, handleAnswerClick } from './decoder.js';
 
-    window.submitDecode = submitDecode;
-    window.displayQuestion = displayQuestion;
-    window.handleAnswerClick = handleAnswerClick;
-    initLoad()
-
-  function initLoad() {
-    document.getElementById("submit_button").addEventListener('click', submitDecode);
-  }
-</script>
 
 
 </body>

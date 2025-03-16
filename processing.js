@@ -1,7 +1,8 @@
-window.AImodel = "gemini-1.5-flash";
+export const AImodel = window.AImodel = "gemini-1.5-flash";
 
 // Určování obtížnosti testu
-window.difficultyText = "Základní úroveň"; // nastavení výchozí úrovně jako základní, kdyby náhodou uživatel žádnou nevybral
+export let difficultyText = window.difficultyText = "Základní úroveň"; // nastavení výchozí úrovně jako základní, kdyby náhodou uživatel žádnou nevybral
+export let selectedDifficulty;
 const difficultyDropdown = document.getElementById('difficultyDropdown');
 difficultyDropdown.addEventListener('change', function () {
     selectedDifficulty = difficultyDropdown.value;
@@ -24,12 +25,12 @@ difficultyDropdown.addEventListener('change', function () {
     }
 });
 
-let currentQuestionIndex = 0;  // Aktuální index otázky
+export let currentQuestionIndex = 0;  // Aktuální index otázky
 
 // Pole, ve kterém budou uloženy otázky vygenerovány Gemini
 let examQuestions = [];
 
-function generateExam() {
+export function generateExam() {
     examQuestions = [];
     document.getElementById("question_number_text").innerHTML = "Otázka 1";
     
@@ -76,7 +77,7 @@ function generateExam() {
 
 }
 
-function displayQuestion() {
+export function displayQuestion() {
     try {
         const outputElement = document.getElementById("output");
         outputElement.innerHTML = '';  // Smazat předchozí obsah
@@ -105,10 +106,10 @@ function displayQuestion() {
 }
 
 // výchozí stav proměnných
-let correctQuestionAmount = 0;
-let incorrectQuestionAmount = 0;
+export let correctQuestionAmount = 0;
+export let incorrectQuestionAmount = 0;
 
-function handleAnswerClick(answer) {
+export function handleAnswerClick(answer) {
     const currentQuestion = examQuestions[currentQuestionIndex];
 
     // Zjistit, jestli odpověď uživatele odpovídá správné odpovědi
@@ -135,7 +136,7 @@ function handleAnswerClick(answer) {
     }
 }
 
-function ListExam() {
+window.ListExam = function() {
     console.log("Attempting to list exam");
     document.getElementById("examListDiv").style.right = "0.5rem";
     // Vybere všechny vhodné prvky z pole ExamQuestions a zobrazí je
@@ -144,23 +145,24 @@ function ListExam() {
     }
 }
 
-function closeExamList() {
+window.closeExamList = function() {
     document.getElementById("examListDiv").style.right = "-125.5rem";
 }
 
-function shareQuestions() {
+window.shareQuestions = function() {
     encode();
     document.getElementById("examListQuestionsList").innerHTML = `
     <b>Kód pro studenty: </b><br>
     ${window.shareCode}<br>
-    <button id="copyShareCodeButton" style="margin-top: 1rem">Kopírovat</button>
+    <button id="copyShareCodeButton" style="margin-top: 1rem; background-color: white"; margin-bottom: 2rem; onclick="document.getElementById('copyShareCodeButton').innerHTML = 'Kopírováno'">Kopírovat</button> 
+    <br><br>
     `
     document.getElementById("copyShareCodeButton").onclick = function() {
         navigator.clipboard.writeText(window.shareCode);
     }
 }
 
-function encode() {
+export const encode = window.encode = function() {
     let jsonString = JSON.stringify(examQuestions);
     console.log(jsonString);
     let base64Encoded = btoa(unescape(encodeURIComponent(jsonString)));
