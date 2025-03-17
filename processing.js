@@ -32,6 +32,7 @@ let examQuestions = [];
 
 export function generateExam() {
     examQuestions = [];
+    document.getElementById("website_title_main").innerHTML = document.getElementById("prompt_input").value;
     document.getElementById("question_number_text").innerHTML = "Otázka 1";
     
     // parsovat HTML, abychom získali důležité informace z výstupu od Gemini
@@ -55,13 +56,22 @@ export function generateExam() {
         // Zpracování odpovědí (správná odpověď je oddělena dvěma mezerami a uvnitř dvou vykřičníků - !a!)
         lines.slice(1).forEach(line => {
             if (/^![a-c]!/.test(line)) {
-                // Detekovat správnou odpověď
+                // Detekovat a uvést správnou odpověď
                 correctAnswer = line.match(/^!([a-c])!/)[1] + ')'; // Extrahovat správnou odpověď, např. "b)"
                 answers.push(line.replace(/^![a-c]!/, '').trim()); // Odstranit vykřičníky
             } else {
                 answers.push(line); // Přidat běžnou odpověď
             }
         });
+        // Ujistit se, že poslední prvek pole answers je "nevím",
+        // pokud má pole answers 4 a více prvků, tak poslední prvek vyměň za nevím.
+        // Pokud má pole answers méně než 4 prvky, tak prvek nevím přidej - k tomuto moc nedochází.
+        if (answers.length >= 4) {
+            answers[answers.length - 1] = "Nevím";
+        } else {
+            answers.push("Nevím");
+        }
+
 
         // Přidat do pole
         if (question && answers.length > 0 && correctAnswer) {
@@ -147,6 +157,7 @@ window.ListExam = function() {
 
 window.closeExamList = function() {
     document.getElementById("examListDiv").style.right = "-125.5rem";
+    document.getElementById("examListQuestionsList").innerHTML = "";
 }
 
 window.shareQuestions = function() {

@@ -7,9 +7,11 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
 dist
 dist-ssr
+.idx
+.vscode
+.firebase
 *.local
 
 # Editor directories and files
@@ -25,3 +27,7 @@ dist-ssr
 
 # Environment variables
 .env*
+
+# Firebase config
+.firebasesrc*
+firebase.json*
