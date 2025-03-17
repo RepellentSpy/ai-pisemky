@@ -6,6 +6,10 @@
     font-family: "Inconsolata", sans-serif;
 }
 
+select > option {
+    background: #1e262d;
+ }
+
 #website_title, #website_title_main {
     font-family: "Doto";
     font-size: 3rem;
